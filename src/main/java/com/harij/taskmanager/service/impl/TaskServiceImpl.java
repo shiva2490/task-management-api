@@ -1,6 +1,7 @@
 package com.harij.taskmanager.service.impl;
 
 import com.harij.taskmanager.dto.CreateTaskRequest;
+import com.harij.taskmanager.dto.DashboardResponse;
 import com.harij.taskmanager.model.Task;
 import com.harij.taskmanager.model.TaskStatus;
 import com.harij.taskmanager.service.TaskService;
@@ -94,5 +95,27 @@ public class TaskServiceImpl implements TaskService {
         if (!removed) {
             throw new RuntimeException("Task not found");
         }
+    }
+
+    @Override
+    public DashboardResponse getDashboardSummary() {
+
+        // Count all tasks
+        long totalTasks = tasks.stream().count();
+
+        // Count completed tasks
+        long completedTasks = tasks.stream()
+                .filter(task -> task.getStatus() == TaskStatus.COMPLETED)
+                .count();
+
+        // Remaining tasks are pending
+        long pendingTasks = totalTasks - completedTasks;
+
+        // Return dashboard summary
+        return new DashboardResponse(
+                totalTasks,
+                completedTasks,
+                pendingTasks
+        );
     }
 }

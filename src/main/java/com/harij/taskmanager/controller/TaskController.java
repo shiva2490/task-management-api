@@ -1,6 +1,7 @@
 package com.harij.taskmanager.controller;
 
 import com.harij.taskmanager.dto.CreateTaskRequest;
+import com.harij.taskmanager.dto.DashboardResponse;
 import com.harij.taskmanager.model.Task;
 import com.harij.taskmanager.service.TaskService;
 import jakarta.validation.Valid;
@@ -68,5 +69,18 @@ public class TaskController {
 
         // Return HTTP 204 No Content
         return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * Returns task dashboard summary.
+     */
+    @GetMapping("/dashboard")
+    public ResponseEntity<DashboardResponse> getDashboardSummary() {
+
+        // Get dashboard details from service
+        DashboardResponse dashboard = taskService.getDashboardSummary();
+
+        // Return dashboard response
+        return ResponseEntity.ok(dashboard);
     }
 }

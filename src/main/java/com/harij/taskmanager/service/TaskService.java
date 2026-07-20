@@ -1,6 +1,7 @@
 package com.harij.taskmanager.service;
 
 import com.harij.taskmanager.dto.CreateTaskRequest;
+import com.harij.taskmanager.dto.DashboardResponse;
 import com.harij.taskmanager.model.Task;
 
 import java.util.List;
@@ -30,4 +31,6 @@ public interface TaskService {
      */
     void deleteTask(Long id);
 
+    // Returns dashboard summary
+    DashboardResponse getDashboardSummary();
 }
