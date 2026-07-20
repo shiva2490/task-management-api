@@ -56,4 +56,17 @@ public class TaskController {
         // Return updated task
         return ResponseEntity.ok(updatedTask);
     }
+
+    /**
+     * Deletes a task by its ID.
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
+
+        // Delegate delete operation to service layer
+        taskService.deleteTask(id);
+
+        // Return HTTP 204 No Content
+        return ResponseEntity.noContent().build();
+    }
 }
