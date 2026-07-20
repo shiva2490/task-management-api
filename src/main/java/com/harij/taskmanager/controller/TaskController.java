@@ -43,4 +43,17 @@ public class TaskController {
         // Return HTTP 200 with task list
         return ResponseEntity.ok(tasks);
     }
+
+    /**
+     * Marks a task as completed.
+     */
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Task> updateTaskStatus(@PathVariable Long id) {
+
+        // Delegate status update to service layer
+        Task updatedTask = taskService.updateTaskStatus(id);
+
+        // Return updated task
+        return ResponseEntity.ok(updatedTask);
+    }
 }
