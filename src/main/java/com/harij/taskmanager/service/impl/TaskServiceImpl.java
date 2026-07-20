@@ -2,6 +2,7 @@ package com.harij.taskmanager.service.impl;
 
 import com.harij.taskmanager.dto.CreateTaskRequest;
 import com.harij.taskmanager.dto.DashboardResponse;
+import com.harij.taskmanager.exception.TaskNotFoundException;
 import com.harij.taskmanager.model.Task;
 import com.harij.taskmanager.model.TaskStatus;
 import com.harij.taskmanager.service.TaskService;
@@ -76,7 +77,7 @@ public class TaskServiceImpl implements TaskService {
         Task task = tasks.stream()
                 .filter(t -> t.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Task not found with id: " + id));
+                .orElseThrow(() -> new TaskNotFoundException("Task not found with id : " + id));
 
         // Update the task status
         task.setStatus(TaskStatus.COMPLETED);
@@ -93,7 +94,7 @@ public class TaskServiceImpl implements TaskService {
 
         // Throw exception if task not found
         if (!removed) {
-            throw new RuntimeException("Task not found with id: " + id);
+            throw new TaskNotFoundException("Task not found with id : " + id);
         }
     }
 
