@@ -76,7 +76,7 @@ public class TaskServiceImpl implements TaskService {
         Task task = tasks.stream()
                 .filter(t -> t.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Task not found"));
+                .orElseThrow(() -> new RuntimeException("Task not found with id: " + id));
 
         // Update the task status
         task.setStatus(TaskStatus.COMPLETED);
@@ -93,7 +93,7 @@ public class TaskServiceImpl implements TaskService {
 
         // Throw exception if task not found
         if (!removed) {
-            throw new RuntimeException("Task not found");
+            throw new RuntimeException("Task not found with id: " + id);
         }
     }
 
