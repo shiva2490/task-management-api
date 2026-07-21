@@ -17,7 +17,7 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
 
                 registry.addMapping("/**")
-                        .allowedOriginPatterns("*")
+                        .allowedOrigins("https://task-manager-frontend-eight-wheat.vercel.app")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .maxAge(3600);
